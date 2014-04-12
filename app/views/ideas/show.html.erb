@@ -2,7 +2,14 @@
 
 <div class="row">
   <div class="span9">
-    <%= image_tag(@idea.picture_url, :width => "100%") if @idea.picture.present? %>
+    <% if @idea.picture_url && @idea.picture_url.include?("mp4") %>
+          
+            <video controls width="350">
+              <source src="<%= @idea.picture_url %>" type="video/mp4">
+            </video>
+          <% else %>
+              <%= image_tag @idea.picture_url, :width => '350px' if @idea.picture%>
+          <% end %> 
   </div>
 
   <div class="span3">
