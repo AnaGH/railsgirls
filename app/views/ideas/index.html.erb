@@ -3,11 +3,23 @@
 <% @ideas.in_groups_of(3) do |group| %>
   <div class="row">
     <% group.compact.each do |idea| %>
-      <div class="span4">
-        <%= image_tag idea.picture_url, :width => '100%' if idea.picture%>
-        <h4><%= link_to idea.name, idea %></h4>
-        <%= idea.description %>
-      </div>
+     	<% if idea.picture_url && idea.picture_url.include?("mp4") %>
+      		<div class="span4">
+      			<video controls width="350">
+      				<source src="<%= idea.picture_url %>" type="video/mp4">
+      			</video>
+      		
+      			<h4><%= link_to idea.name, idea %></h4>
+       			 <%= idea.description %>
+       		 </div>
+      	<% else %>
+      		<div class="span4"> 
+      	  		<%= image_tag idea.picture_url, :width => '350px' if idea.picture%>
+      	  		<h4><%= link_to idea.name, idea %></h4>
+       			 <%= idea.description %>
+        	</div>
+      	<% end %>
+      	
     <% end %>
   </div>
 <% end %>
